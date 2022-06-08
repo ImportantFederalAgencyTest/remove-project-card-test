@@ -12,4 +12,5 @@ jobs:
         with:
           project: Triage Test Board
           column: Done
+          action: delete
           repo-token: ${{ secrets.REMOVE_PROJECT_TOKEN }}
