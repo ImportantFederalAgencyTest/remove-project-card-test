@@ -1,14 +1,27 @@
-name: Add New Issues to Triage Board
+name: Triage Board Management
 
 on:
   issues:
-    types: [opened]
+    types:
+      - opened
+      - closed
 jobs:
   createCard:
     runs-on: ubuntu-latest
+    if: github.event_name == 'issue' && github.event.action == 'opened'
     steps:
       - name: Add New Issues to Issue Triage Board
         uses: peter-evans/create-or-update-project-card@866533e2ae61f13c35fd1d374049713fab43c729 # current tag: v2
         with:
           project-name: Triage Test Board
           column-name: To do
+  removeCard:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'issue' && github.event.action == 'opened'
+    steps:
+      - uses: alex-page/github-project-automation-plus@bb266ff4dde9242060e2d5418e120a133586d488 #current tag: v0.8.1
+        with:
+          project: Triage Test Board
+          column: Done
+          action: delete
+          repo-token: ${{ secrets.REMOVE_PROJECT_TOKEN }}
