@@ -6,6 +6,11 @@ on:
       - opened
       - closed
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug Environment
+        uses: hmarr/debug-action@v2.0.1
   createCard:
     runs-on: ubuntu-latest
     if: github.event_name == 'issue' && github.event.action == 'opened'
